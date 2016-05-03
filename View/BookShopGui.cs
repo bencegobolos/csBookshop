@@ -125,5 +125,41 @@ namespace BookShop.View
             Application.Exit();
         }
         #endregion
+
+        private void addCdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (AddCdDialog dialog = new AddCdDialog(this))
+            {
+                dialog.ShowDialog();
+            }
+        }
+
+        private void listCustomersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listCdsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IEnumerable<Cd> cds = m_controller.GetAvailableCdList();
+
+            // kiírjuk konzolra
+            foreach (Cd cd in cds)
+            {
+                Console.WriteLine(cd);
+            }
+
+            // konvertáljuk a forrást a grid-nek megfelelõre
+            if (!(cds is IList<Cd>))
+            {
+                // A "List<T>" osztály megvalósítja az "IList<T>" interface-t.
+                cds = new List<Cd>(cds);
+            }
+
+            // megjelenítés
+            booksDataGridView.DataSource = null;
+            booksDataGridView.DataSource = cds;
+            booksDataGridView.Visible = true;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 using BookShop.Dal;
 using BookShop.Model;
@@ -98,6 +99,33 @@ namespace BookShop.Controller
             }
 
             return availableBooks;
+        }
+        #endregion
+
+        #region cd metódusok
+        public bool BuyCd(Cd cd)
+        {
+            if (cd.Year < 1979 || cd.Year > 2016)
+            {
+                Console.WriteLine("A CD-nek 1979 és 2016 közti kiadási évûnek kell lennie.");
+                return false;
+            }
+
+            cd.Hit = (cd.Year == 2016);
+
+            return m_dao.AddCd(cd);
+        }
+
+        public IEnumerable<Cd> GetAvailableCdList()
+        {
+            List<Cd> availableCds = new List<Cd>();
+
+            foreach (Cd cd in m_dao.GetCds())
+            {
+                availableCds.Add(cd);
+            }
+
+            return availableCds;
         }
         #endregion
     }

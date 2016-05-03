@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BookShop.Model;
 
@@ -142,6 +143,16 @@ namespace BookShop.Dal
         public IEnumerable<Book> GetBooks()
         {
             return m_books;
+        }
+
+        public bool AddCd(Cd cd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Cd> GetCds()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

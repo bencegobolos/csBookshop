@@ -35,10 +35,12 @@ namespace BookShop.View
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buyBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addCdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listCustomersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listAvailableBooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.booksDataGridView = new System.Windows.Forms.DataGridView();
+            this.listCdsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.booksDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +76,8 @@ namespace BookShop.View
             // 
             this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newCustomerToolStripMenuItem,
-            this.buyBookToolStripMenuItem});
+            this.buyBookToolStripMenuItem,
+            this.addCdToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.dataToolStripMenuItem.Text = "&Data";
@@ -95,11 +98,19 @@ namespace BookShop.View
             this.buyBookToolStripMenuItem.Text = "Buy Book...";
             this.buyBookToolStripMenuItem.Click += new System.EventHandler(this.BuyBookToolStripMenuItem_Click);
             // 
+            // addCdToolStripMenuItem
+            // 
+            this.addCdToolStripMenuItem.Name = "addCdToolStripMenuItem";
+            this.addCdToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addCdToolStripMenuItem.Text = "Add Cd";
+            this.addCdToolStripMenuItem.Click += new System.EventHandler(this.addCdToolStripMenuItem_Click);
+            // 
             // listToolStripMenuItem
             // 
             this.listToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listCustomersToolStripMenuItem,
-            this.listAvailableBooksToolStripMenuItem});
+            this.listAvailableBooksToolStripMenuItem,
+            this.listCdsToolStripMenuItem});
             this.listToolStripMenuItem.Name = "listToolStripMenuItem";
             this.listToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.listToolStripMenuItem.Text = "&List";
@@ -110,6 +121,7 @@ namespace BookShop.View
             this.listCustomersToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
             this.listCustomersToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.listCustomersToolStripMenuItem.Text = "List Customers";
+            this.listCustomersToolStripMenuItem.Click += new System.EventHandler(this.listCustomersToolStripMenuItem_Click);
             // 
             // listAvailableBooksToolStripMenuItem
             // 
@@ -128,6 +140,13 @@ namespace BookShop.View
             this.booksDataGridView.Size = new System.Drawing.Size(784, 538);
             this.booksDataGridView.TabIndex = 1;
             this.booksDataGridView.Visible = false;
+            // 
+            // listCdsToolStripMenuItem
+            // 
+            this.listCdsToolStripMenuItem.Name = "listCdsToolStripMenuItem";
+            this.listCdsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.listCdsToolStripMenuItem.Text = "List Cds";
+            this.listCdsToolStripMenuItem.Click += new System.EventHandler(this.listCdsToolStripMenuItem_Click);
             // 
             // BookShopGui
             // 
@@ -164,6 +183,8 @@ namespace BookShop.View
         private System.Windows.Forms.ToolStripMenuItem listCustomersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listAvailableBooksToolStripMenuItem;
         private System.Windows.Forms.DataGridView booksDataGridView;
+        private System.Windows.Forms.ToolStripMenuItem addCdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listCdsToolStripMenuItem;
     }
 }
 

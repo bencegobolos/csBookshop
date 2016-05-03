@@ -286,5 +286,115 @@ namespace BookShop.Dal
             return rvBooks;
         }
         #endregion
+
+        #region cd mûveletek
+        public bool AddCd(Cd cd)
+        {
+            bool rvSucceeded = false;
+
+            using (SQLiteConnection conn = new SQLiteConnection(s_connectionString))
+            {
+                conn.Open();
+
+                SQLiteCommand command = conn.CreateCommand();
+
+                command.CommandText =
+                    "INSERT INTO Cd " +
+                    "  (artist, title, price, year, hit, selection) " +
+                    "VALUES " +
+                    "  (@artist, @title, @price, @year, @hit, @selection)";
+
+                command.Parameters.Add("artist", DbType.String).Value = cd.Artist;
+                command.Parameters.Add("title", DbType.String).Value = cd.Title;
+                command.Parameters.Add("price", DbType.Int32).Value = cd.Price;
+                command.Parameters.Add("year", DbType.Int32).Value = cd.Year;
+                command.Parameters.Add("hit", DbType.Boolean).Value = cd.Hit;
+                command.Parameters.Add("selection", DbType.Boolean).Value = cd.Selection;
+
+                int affectedRows = command.ExecuteNonQuery();
+
+                if (affectedRows == 1)
+                {
+                    rvSucceeded = true;
+                }
+            }
+
+            return rvSucceeded;
+        }
+
+        private Cd FindCdByArtistTitle(SQLiteConnection connection, Cd cd)
+        {
+            Cd rvFound = null;
+
+            using (SQLiteCommand command = connection.CreateCommand())
+            {
+                command.CommandText =
+                    "SELECT * " +
+                    "FROM Cd " +
+                    "WHERE artist = @artist AND title = @title";
+
+                command.Parameters.Add("artist", DbType.String).Value = cd.Artist;
+                command.Parameters.Add("title", DbType.String).Value = cd.Title;
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    List<Cd> cds = ReadCdsFromReader(reader);
+
+                    if (cds.Count > 0)
+                    {
+                        rvFound = cds[0];
+                    }
+                }
+            }
+
+            return rvFound;
+        }
+
+        public IEnumerable<Cd> GetCds()
+        {
+            List<Cd> rvCds = null;
+
+            using (SQLiteConnection conn = new SQLiteConnection(s_connectionString))
+            using (SQLiteCommand command = conn.CreateCommand())
+            {
+                command.CommandText =
+                    "SELECT * " +
+                    "FROM Cd";
+
+                conn.Open();
+
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    rvCds = ReadCdsFromReader(reader);
+                }
+            }
+
+            return rvCds;
+        }
+
+        private List<Cd> ReadCdsFromReader(IDataReader reader)
+        {
+            List<Cd> rvCds = new List<Cd>();
+
+            while (reader.Read())
+            {
+                Cd cd = new Cd
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("id")),
+
+                    Artist = reader.GetString(reader.GetOrdinal("artist")),
+                    Title = reader.GetString(reader.GetOrdinal("title")),
+                    Price = reader.GetInt32(reader.GetOrdinal("price")),
+                    Year = reader.GetInt32(reader.GetOrdinal("year")),
+                    Hit = reader.GetBoolean(reader.GetOrdinal("hit")),
+                    Selection = reader.GetBoolean(reader.GetOrdinal("selection")),
+                };
+
+                rvCds.Add(cd);
+            }
+
+            return rvCds;
+        }
+        #endregion
     }
 }
