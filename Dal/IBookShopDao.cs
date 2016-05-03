@@ -49,5 +49,16 @@ namespace BookShop.Dal
         /// <returns>A tárolt <see cref="Book"/> példányok.</returns>
         IEnumerable<Book> GetBooks();
         #endregion
+
+        #region cd műveletek
+        bool AddCd(Cd cd);
+
+
+        /// <summary>
+        /// Visszaadja a tárolt <see cref="Customer"/> példányokat.
+        /// </summary>
+        /// <returns>A tárolt <see cref="Customer"/> példányok kollekciója.</returns>
+        IEnumerable<Cd> GetCds();
+        #endregion
     }
 }
